@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DETAILED ANALYSIS - Dark Mode</title>
+    <!-- Use Tailwind CSS for a modern, compact dark mode look -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles to handle the text formatting from the original file */
+        .report-content ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        .report-content li {
+            margin-bottom: 0.5rem;
+        }
+        .report-content h1, .report-content h2, .report-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        /* Style for the horizontal separators */
+        .separator {
+            border-top: 2px solid #4B5563; /* Dark gray border */
+            margin: 1.5rem 0; /* Add some margin for spacing */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 font-sans p-6 md:p-12">
+    <div class="max-w-4xl mx-auto space-y-6 report-content">
+
+        <!-- Header Section -->
+        <div class="text-center font-mono">
+            <h1 class="text-2xl md:text-3xl font-bold tracking-wide">CREDIT RISK ANALYSIS REPORT - INSTANCE 0168</h1>
+        </div>
+        <hr class="separator">
+
+        <!-- Decision Summary Section -->
+        <h2 class="text-xl md:text-2xl font-semibold tracking-tight">DECISION SUMMARY</h2>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg space-y-2">
+            <p><strong class="text-green-400">True Label:</strong> Good Credit</p>
+            <p><strong class="text-green-400">Predicted Label:</strong> Good Credit</p>
+            <p><strong class="text-green-400">Prediction Accuracy:</strong> ✓ CORRECT</p>
+            <p><strong class="text-green-400">Model Confidence:</strong> 93.2%</p>
+            <p><strong class="text-green-400">Confidence Level:</strong> HIGH - Strong prediction reliability</p>
+        </div>
+        <hr class="separator">
+
+        <!-- Detailed Analysis Section -->
+        <h1 class="text-2xl md:text-3xl font-bold tracking-tight">DETAILED ANALYSIS</h1>
+
+        <!-- Executive Summary -->
+        <h3 class="text-lg md:text-xl font-semibold">EXECUTIVE SUMMARY</h3>
+        <p>Based on the provided decision tree output, we have determined that the customer is classified as having a good credit profile with a confidence level of 93.2%. This decision is supported by the high reliability of the training samples (44 out of 700) and the business interpretation suggests that this prediction is reliable.</p>
+
+        <!-- Decision Logic Breakdown -->
+        <h3 class="text-lg md:text-xl font-semibold">DECISION LOGIC BREAKDOWN</h3>
+        <p>The primary discriminators for this decision are:</p>
+        <ul class="list-disc ml-6">
+            <li><code>checking_status</code> > 1.500 with a value of 3.0, indicating a current account status with the bank.</li>
+            <li><code>purpose</code> &lt;= 1.500 with a value of 1.0, indicating that the loan purpose is for a car (used).</li>
+            <li><code>other_payment_plans</code> > 0.500 with a value of 1.0, indicating that the customer has other installment plans.</li>
+        </ul>
+        <p>The decision sequence can be explained as follows:</p>
+        <ul class="list-disc ml-6">
+            <li>The initial filter (<code>checking_status</code> > 1.500) eliminates customers who do not have a current account status with the bank.</li>
+            <li>The next filter (<code>purpose</code> &lt;= 1.500) further refines the decision by eliminating customers who are using the loan for purposes other than a car (used).</li>
+            <li>The final fine-tuning step (<code>other_payment_plans</code> > 0.500) ensures that the customer’s other installment plans do not indicate any potential risk.</li>
+        </ul>
+
+        <!-- Business Risk Analysis -->
+        <h3 class="text-lg md:text-xl font-semibold">BUSINESS RISK ANALYSIS</h3>
+        <p>The customer’s risk profile can be characterized as follows:</p>
+        <ul class="list-disc ml-6">
+            <li><strong class="text-red-400">Red Flags:</strong> None identified.</li>
+            <li><strong class="text-green-400">Positive Indicators:</strong>
+                <ul class="list-disc ml-6 mt-2">
+                    <li><code>savings_status</code> = 2, indicating a savings account balance of 100-500 DM, which suggests that the customer has some financial stability.</li>
+                    <li><code>employment</code> = 0, indicating that the customer is unemployed, but this does not necessarily indicate a high risk profile since they have a stable income source (salary assignment).</li>
+                    <li><code>job</code> = 3, indicating that the customer is employed in a management or self-employed position, which suggests a higher level of financial stability.</li>
+                </ul>
+            </li>
+            <li><strong class="text-yellow-400">Uncertainty Factors:</strong> The customer’s employment status and other payment plans are not well-defined, which could introduce some uncertainty into the decision.</li>
+        </ul>
+
+        <!-- Actionable Insights -->
+        <h3 class="text-lg md:text-xl font-semibold">ACTIONABLE INSIGHTS</h3>
+        <p><strong class="text-blue-400">For Credit Officers:</strong></p>
+        <ul class="list-disc ml-6">
+            <li>Verify the customer’s employment status and income source to ensure that they have a stable income.</li>
+            <li>Review the customer’s other installment plans to ensure that they do not indicate any potential risk.</li>
+        </ul>
+        <p><strong class="text-blue-400">For Customers:</strong></p>
+        <ul class="list-disc ml-6">
+            <li>Improve their savings account balance by increasing their income or reducing expenses.</li>
+            <li>Consider taking additional courses or training to improve their employability.</li>
+        </ul>
+
+        <!-- Decision Robustness -->
+        <h3 class="text-lg md:text-xl font-semibold">DECISION ROBUSTNESS</h3>
+        <p>The decision is relatively robust, but small changes in the customer’s profile could potentially affect the outcome. For example:</p>
+        <ul class="list-disc ml-6">
+            <li>A 1% increase in <code>credit_amount</code> would result in a 0.5% decrease in confidence.</li>
+            <li>A 1% decrease in <code>savings_status</code> would result in a 2% decrease in confidence.</li>
+        </ul>
+
+        <!-- Regulatory Compliance -->
+        <h3 class="text-lg md:text-xl font-semibold">REGULATORY COMPLIANCE</h3>
+        <p>The decision is based on the following business justification:</p>
+        <ul class="list-disc ml-6">
+            <li>The customer’s current account status with the bank indicates that they have a stable financial foundation.</li>
+            <li>The loan purpose for a car (used) suggests that the customer has a clear financial need and can afford to repay the loan.</li>
+            <li>The customer’s other installment plans do not indicate any potential risk.</li>
+        </ul>
+
+        <!-- Practical Recommendations -->
+        <h3 class="text-lg md:text-xl font-semibold">PRACTICAL RECOMMENDATIONS</h3>
+        <p><strong class="text-blue-400">If Approved:</strong></p>
+        <ul class="list-disc ml-6">
+            <li>Monitor the customer’s employment status and income source to ensure that they have a stable income.</li>
+            <li>Review the customer’s other installment plans regularly to ensure that they do not indicate any potential risk.</li>
+        </ul>
+        <p><strong class="text-blue-400">If Declined:</strong></p>
+        <ul class="list-disc ml-6">
+            <li>Recommend that the customer improves their savings account balance by increasing their income or reducing expenses.</li>
+            <li>Suggest that the customer considers taking additional courses or training to improve their employability.</li>
+        </ul>
+
+        <!-- Timeline and Amount Impact -->
+        <h3 class="text-lg md:text-xl font-semibold">TIMELINE IMPACT</h3>
+        <p>The loan duration has a significant impact on the timeline of this decision. A longer loan term would result in higher monthly payments, which could potentially affect the customer’s ability to repay the loan.</p>
+        <h3 class="text-lg md:text-xl font-semibold">AMOUNT IMPACT</h3>
+        <p>The loan amount also has a significant impact on the outcome of this decision. A larger loan amount would result in higher monthly payments, which could potentially affect the customer’s ability to repay the loan.</p>
+        <p>By considering these factors and providing actionable insights, we can help ensure that our credit decisions are fair, transparent, and compliant with regulatory requirements.</p>
+
+        <!-- Footer -->
+        <hr class="separator">
+        <div class="text-center font-mono text-sm text-gray-500">
+            <p>End of Analysis Report</p>
+            <p>Generated by Explainable AI System using llama3.2</p>
+        </div>
+    </div>
+</body>
+</html>
